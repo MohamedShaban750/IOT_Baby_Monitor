@@ -24,48 +24,38 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-#data = {"run": 1}
-#db.child("motor").set(data)
-
 in1 = 17
-en = 27
+en1 = 27
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(en,GPIO.OUT)
-#GPIO.output(en, True)
+GPIO.setup(en1,GPIO.OUT)
 
 GPIO.setup(in1,GPIO.OUT)
-#GPIO.output(in1, 1)
 
-p=GPIO.PWM(en,1000)
-p.start(50)
+p1=GPIO.PWM(en1,1000)
+p1.start(50)
 
-#print "**********    running  *************"
 
 while True:
-    control = db.child("Motor/run").get()
-    level = db.child("Motor/level").get()
-    #GPIO.output(in1, control.val())
-    #print "control: ", control.val()
+    control1 = db.child("Motor/run").get()
+    level1 = db.child("Motor/level").get()
     
-    if (control.val()==0):
+    if (control1.val()==0):
         GPIO.output(in1, 0)
         
-    elif (level.val()==1):
-        p.ChangeDutyCycle(50)
+    elif (level1.val()==1):
+        p1.ChangeDutyCycle(50)
         GPIO.output(in1, 1)
         
-    elif (level.val()==2):
-        p.ChangeDutyCycle(75)
+    elif (level1.val()==2):
+        p1.ChangeDutyCycle(75)
         GPIO.output(in1, 1)
         
-    elif (level.val()==3):
-        p.ChangeDutyCycle(100)
+    elif (level1.val()==3):
+        p1.ChangeDutyCycle(100)
         GPIO.output(in1, 1)    
-        
-    #sleep(1)
-    
+            
 GPIO.cleanup() 
 
 
