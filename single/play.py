@@ -28,9 +28,6 @@ db = firebase.database()
 pygame.mixer.init()
 s=pygame.mixer.music
 
-
-
-#play = db.child("play").get()
 while True:
     voice = db.child("Voices/voice").get()
     if (voice.val()==1):
@@ -48,36 +45,3 @@ while True:
     elif (voice.val()==0):
         pygame.mixer.music.stop()
     
-            
-    #elif (play.val()==0):
-        #pygame.mixer.music.stop()
-
-#while pygame.mixer.music.get_busy() == True:
-   # continue
-
-#while True:
-#    play = db.child("play").get()
-#   if (play.val()==1):
-#        pygame.mixer.music.load("1.mp3")
- #       pygame.mixer.music.play()
-  #      #time.sleep(20)
-   #     if (play.val()==1):
-    #        pygame.mixer.music.get_busy()
-     #       time.sleep(20)
-  #  elif (play.val()==0):
-   #     pygame.mixer.music.stop()
-   
-   
-
-#while True:
-#    play = db.child("play").get()
- #   if (play.val()==1):
-  #      s.load("1.mp3")
-   #     s.play()
-    #    while True:
-     #       s.get_busy()
-      #      time.sleep(20)
-       #     break
-    #elif (play.val()==0):
-     #   pygame.mixer.music.stop()
-
