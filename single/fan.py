@@ -1,6 +1,5 @@
 import pyrebase
 import RPi.GPIO as GPIO
-from time import sleep
 
 config = {
   "apiKey": "AIzaSyDhinRkAu5k-3aL83EIe_thcTwhmu1fVvU",
@@ -24,50 +23,36 @@ config = {
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-#data = {"run": 1}
-#db.child("motor").set(data)
-
-in1 = 20
-en = 21
+in2 = 20
+en2 = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(en,GPIO.OUT)
-#GPIO.output(en, True)
+GPIO.setup(en2,GPIO.OUT)
 
-GPIO.setup(in1,GPIO.OUT)
-#GPIO.output(in1, 1)
+GPIO.setup(in2,GPIO.OUT)
 
-p=GPIO.PWM(en,1000)
-p.start(50)
-
-#print "**********    running  *************"
+p2=GPIO.PWM(en2,1000)
+p2.start(50)
 
 while True:
-    control = db.child("Fan/run").get()
-    level = db.child("Fan/level").get()
-    #GPIO.output(in1, control.val())
-    #print "control: ", control.val()
+    control2 = db.child("Fan/run").get()
+    level2 = db.child("Fan/level").get()
     
-    if (control.val()==0):
-        GPIO.output(in1, 0)
+    if (control2.val()==0):
+        GPIO.output(in2, 0)
         
-    elif (level.val()==1):
-        p.ChangeDutyCycle(50)
-        GPIO.output(in1, 1)
+    elif (level2.val()==1):
+        p2.ChangeDutyCycle(50)
+        GPIO.output(in2, 1)
         
-    elif (level.val()==2):
-        p.ChangeDutyCycle(75)
-        GPIO.output(in1, 1)
+    elif (level2.val()==2):
+        p2.ChangeDutyCycle(75)
+        GPIO.output(in2, 1)
         
-    elif (level.val()==3):
-        p.ChangeDutyCycle(100)
-        GPIO.output(in1, 1)    
-        
-    #sleep(1)
-    
+    elif (level2.val()==3):
+        p2.ChangeDutyCycle(100)
+        GPIO.output(in2, 1)    
+            
 GPIO.cleanup() 
-
-
-
 
