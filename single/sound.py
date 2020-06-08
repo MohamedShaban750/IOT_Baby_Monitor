@@ -34,14 +34,11 @@ def callback(channel):
     if GPIO.input(channel):
         print "Sound Detected!"
         db.child("Sound Detection/detected").set("yes")
-        #time.sleep(5)
-        #db.child("sound").set("no")
-        #time.sleep(10)
+        
     else:
         print "Sound Detected!"
         db.child("Sound Detection/detected").set("yes")
-        #time.sleep(5)
-        #db.child("sound").set("no")
+       
 
 GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime=300)  # let us know when the pin goes HIGH or LOW
 GPIO.add_event_callback(channel, callback)  # assign function to GPIO PIN, Run function on change
